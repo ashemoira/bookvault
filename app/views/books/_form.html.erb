@@ -23,17 +23,17 @@
 
   <div class="field">
     <%= form.label :category %>
-    <%= form.number_field :category %>
+    <%= form.select :category, Book.category.options %>
   </div>
 
   <div class="field">
     <%= form.label :page %>
-    <%= form.number_field :page %>
+    <%= form.text_field :page %>ページ
   </div>
 
   <div class="field">
     <%= form.label :format %>
-    <%= form.number_field :format %>
+    <%= form.select :format, Book.format.options %>
   </div>
 
   <div class="actions">
