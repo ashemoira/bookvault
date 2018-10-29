@@ -1,4 +1,6 @@
 class BookshelvesController < ApplicationController
+  before_action :set_bookshelf, only: [:show, :edit, :update, :destroy]
+
   def index
     @bookshelves = Bookshelf.all
   end
@@ -33,7 +35,7 @@ class BookshelvesController < ApplicationController
 
   def destroy
     @bookshelf.destroy
-    redirect_to books_url, notice: '本棚の削除に成功しました'
+    redirect_to bookshelves_url, notice: '本棚の削除に成功しました'
   end
 
   private
@@ -42,7 +44,7 @@ class BookshelvesController < ApplicationController
       @bookshelf = Bookshelf.find(params[:id])
     end
 
-    def book_params
+    def bookshelf_params
       params.require(:bookshelf).permit(:title)
     end
 end

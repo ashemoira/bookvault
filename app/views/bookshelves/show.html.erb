@@ -1,2 +1,9 @@
-<h1>Bookshelves#show</h1>
-<p>Find me in app/views/bookshelves/show.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @bookshelf.title %>
+</p>
+
+<%= link_to 'Edit', edit_bookshelf_path(@bookshelf) %> |
+<%= link_to 'Back', bookshelves_path %>

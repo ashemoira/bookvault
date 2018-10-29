@@ -1,2 +1,5 @@
-<h1>Bookshelves#new</h1>
-<p>Find me in app/views/bookshelves/new.html.erb</p>
+<h1>New Book</h1>
+
+<%= render 'form', bookshelf: @bookshelf %>
+
+<%= link_to 'Back', books_path %>
