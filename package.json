@@ -9,6 +9,27 @@
     "react-dom": "^16.5.2"
   },
   "devDependencies": {
+    "husky": "^1.1.2",
+    "lint-staged": "^8.0.3",
     "webpack-dev-server": "2.11.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js{,x},{s,}css,md,y{a,}ml},json": [
+      "yarn run prettier --write",
+      "git add"
+    ],
+    "*.rb": [
+      "bundle exec rubocop -a",
+      "git add"
+    ],
+    "*_spec.rb": [
+      "bundle exec rspec",
+      "git add"
+    ]
   }
 }
