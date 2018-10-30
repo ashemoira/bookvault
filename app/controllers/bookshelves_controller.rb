@@ -1,19 +1,20 @@
+# frozen_string_literal: true
+
+# bookshelves controller
 class BookshelvesController < ApplicationController
-  before_action :set_bookshelf, only: [:show, :edit, :update, :destroy]
+  before_action :set_bookshelf, only: %i[show edit update destroy]
 
   def index
     @bookshelves = Bookshelf.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @bookshelf = Bookshelf.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @bookshelf = Bookshelf.new(bookshelf_params)
@@ -40,11 +41,11 @@ class BookshelvesController < ApplicationController
 
   private
 
-    def set_bookshelf
-      @bookshelf = Bookshelf.find(params[:id])
-    end
+  def set_bookshelf
+    @bookshelf = Bookshelf.find(params[:id])
+  end
 
-    def bookshelf_params
-      params.require(:bookshelf).permit(:title)
-    end
+  def bookshelf_params
+    params.require(:bookshelf).permit(:title)
+  end
 end
