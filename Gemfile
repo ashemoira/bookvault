@@ -54,6 +54,7 @@ group :development do
   gem 'pry-rails'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'rubocop'
 end
 
 
