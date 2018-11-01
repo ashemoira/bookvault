@@ -2,7 +2,9 @@
 
 # book controller controller
 class BooksController < ApplicationController
-  before_action :set_book, only: %i[show edit update destroy]
+  before_action :fetch_book, only: %i(show edit update destroy)
+
+  permits :title, :author, :category, :page, :format
 
   def index
     @books = Book.all
@@ -16,8 +18,8 @@ class BooksController < ApplicationController
 
   def edit; end
 
-  def create
-    @book = Book.new(book_params)
+  def create(book)
+    @book = Book.new(book)
 
     if @book.save
       redirect_to @book, notice: 'Book was successfully created.'
@@ -26,8 +28,8 @@ class BooksController < ApplicationController
     end
   end
 
-  def update
-    if @book.update(book_params)
+  def update(book)
+    if @book.update(book)
       redirect_to @book, notice: 'Book was successfully updated.'
     else
       render :edit
@@ -41,11 +43,7 @@ class BooksController < ApplicationController
 
   private
 
-  def set_book
-    @book = Book.find(params[:id])
-  end
-
-  def book_params
-    params.require(:book).permit(:title, :author, :category, :page, :format)
+  def fetch_book(id)
+    @book = Book.find(id)
   end
 end
