@@ -13,10 +13,12 @@ RSpec.describe BooksController, type: :controller do
 
   let(:valid_session) { {} }
 
+  let(:book) { FactoryBot.create(:book) }
+
   describe 'GET #index' do
     it 'returns a success response' do
-      Book.create! valid_attributes
-      get :index, params: {}, session: valid_session
+      book
+      get :index, params: {}
       expect(response).to be_successful
     end
   end
@@ -39,8 +41,7 @@ RSpec.describe BooksController, type: :controller do
 
   describe 'GET #edit' do
     it 'returns a success response' do
-      book = Book.create! valid_attributes
-      get :edit, params: { id: book.to_param }, session: valid_session
+      get :edit, params: { id: book.to_param }
       expect(response).to be_successful
     end
   end
@@ -69,28 +70,24 @@ RSpec.describe BooksController, type: :controller do
 
   describe 'PUT #update' do
     context 'with valid params' do
-      let(:new_attributes) do
-        skip('Add a hash of attributes valid for your model')
-      end
-
       it 'updates the requested book' do
-        book = Book.create! valid_attributes
-        put :update, params: { id: book.to_param, book: new_attributes }, session: valid_session
+        book
+        put :update, params: { id: book.to_param, book: book.attributes }
         book.reload
-        skip('Add assertions for updated state')
       end
 
       it 'redirects to the book' do
-        book = Book.create! valid_attributes
-        put :update, params: { id: book.to_param, book: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(book)
+        book
+        put :update, params: { id: book.to_param, book: book.attributes }
+        expect(response).to redirect_to books_path
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'edit' template)" do
-        book = Book.create! valid_attributes
-        put :update, params: { id: book.to_param, book: invalid_attributes }, session: valid_session
+        book
+        book.title = 'テスト' * 100
+        put :update, params: { id: book.to_param, book: book.attributes }
         expect(response).to be_successful
       end
     end
